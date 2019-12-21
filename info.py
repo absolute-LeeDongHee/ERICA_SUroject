@@ -21,14 +21,34 @@ soup = BeautifulSoup(html, 'html.parser')
 #닉네임 크롤링======================================================
 for i in soup.select('div[class=SummonerName]'):
 	SummonerName = i.text
+
 #랭킹 크롤링========================================================
 for i in soup.select('span[class=ranking]'):
 	Ranking = i.text
+
 #당신은 언랭?=======================================================
 Tier_Unranked = soup.select('div.cell')
+
 #속한 리그 크롤링===================================================
 for i in soup.select('div[class=LeagueType]'):
 	LeagueType.append(i.text)
+
 # 티어 크롤링=======================================================
 for i in soup.select('div[class=Tier]'):
 	Tier.append(i.text)
+
+# 리그 포인트 크롤링================================================
+for i in soup.select('div[class=LP]'):
+	LP.appemd(i.text)
+
+#승리 수 크롤링=====================================================
+for i in soup.select('span[class=Wins]'):
+	Wins.append(i.text)
+
+#패배 수 크롤링=====================================================
+for i in soup.select('span[class=losses]'):
+	losses.append(i.text)
+
+#승률 크롤링=======================================================
+for i in soup.select('span[class=Ratio]'):
+	Ratio.append(i.text)
