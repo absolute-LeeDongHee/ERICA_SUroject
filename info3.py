@@ -73,4 +73,5 @@ def import_info():
 		else:
 			print("소환사 정보가 없습니다. 전적 검색을 종료합니다.")
 			return 0
+print(SummonerName + "님의 레벨: " + Level)
 import_info()
