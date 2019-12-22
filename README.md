@@ -9,7 +9,8 @@
 3. 롤 할 시간으로 할 수 있었던 일 출력
 4. 실시간 관전 사이트 알려줌
 
-## 2. 빌드 방법
+## 2. 빌드 방법 - 압축은 풀었을꺼라 믿습니다!
+
 1. sudo apt-get update
 2. sudo apt-get install python3를 터미널에 입력하여 파이썬을 깔자!
 3. sudo apt-get install python3-pip 파이썬으로 작성된 패키지의 설치와 관리를 위해 설치하자!
