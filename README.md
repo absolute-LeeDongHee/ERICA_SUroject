@@ -33,3 +33,6 @@
 
 
 + !명령어를 입력하면 내릴 수 있는 명령어들이 출력된다.
+
+개발일지는 report.txt
+커뮤니티 보고서는 https://github.com/absolute-LeeDongHee/ERICA-OSS-report
