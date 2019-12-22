@@ -19,5 +19,9 @@ async def on_message(message):
 	if message.content.startswith("!안녕"):
 		channel = message.channel
 		await channel.send('ㅎㅇㅎㅇ!')
+	
+	if message.content.startswith("!관전"):
+		channel = message.channel
+		await channel.send('https://www.op.gg/spectate/pro/')
 
 client.run(token)
