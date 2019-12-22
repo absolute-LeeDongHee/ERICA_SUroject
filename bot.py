@@ -42,7 +42,6 @@ async def on_message(message):
 		channel = message.channel
 		Name = message.content[4:]
 		SummonerName = ""
-		Ranking = ""
 		TierUnranked = ""
 		Tier = []
 		LP = []
@@ -76,8 +75,8 @@ async def on_message(message):
 		# 승률 크롤링
 		for i in soup.select('span[class=Ratio]'):
 			Ratio.append(i.text)
-		embed = discord.Embed(title="해당 소환사의 전적입니다.", color=0x00ff00)
 		if SummonerName != "":
+			embed = discord.Embed(title="해당 소환사의 전적입니다.", color=0x00ff00)
 			if ('Unranked' in str(TierUnranked[0])):
 				embed.add_field(name='솔랭 티어', value="언랭", inline=False)
 			else:
@@ -96,6 +95,47 @@ async def on_message(message):
 			await channel.send(embed=embed)
 		else:
 			await channel.send("소환사 정보가 없습니다.")
+
+	if message.content.startswith("!시간"):
+		channel = message.channel
+		Name = message.content[4:]
+		play_time = []
+		url = 'https://kr.wol.gg/stats/kr/' + Name + '/'
+		hdr = {'Accept-Language': 'ko_KR,en;q=0.8', 'User-Agent': (
+			'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Mobile Safari/537.36')}
+		req = requests.get(url, headers=hdr)
+		html = req.text
+		soup = BeautifulSoup(html, 'html.parser')
+		# 플레이 타임 크롤링
+		for i in soup.find_all('div', 'time center'):
+			play_time.append(i)
+		# 소환사 이름 크롤링
+		summonername2 = soup.find(['h1'])
+		if summonername2 != "":
+			embed = discord.Embed(title="해당 소환사의 플레이 시간입니다.", color=0x00ff00)
+			embed.add_field(name='Minute', value=play_time[0].get_text(), inline=False)
+			embed.add_field(name='Hour', value=play_time[1].get_text(), inline=False)
+			embed.add_field(name='Day', value=play_time[2].get_text(), inline=False)
+			await channel.send(embed=embed)
+		else:
+			await channel.send("소환사 정보가 없습니다.")
+
+	if message.content.startswith("!랭킹"):
+		channel = message.channel
+		Name = message.content[4:]
+		rank = []
+		url = 'https://kr.wol.gg/stats/kr/' + Name + '/'
+		hdr = {'Accept-Language': 'ko_KR,en;q=0.8', 'User-Agent': (
+			'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Mobile Safari/537.36')}
+		req = requests.get(url, headers=hdr)
+		html = req.text
+		soup = BeautifulSoup(html, 'html.parser')
+		# 소환사 이름 크롤링
+		summonername3 = soup.find(['h1'])
+		for i in soup.find_all('div', 'rank center'):
+			rank.append(i)
+		if summonername3 != "":
+			embed = discord.Embed(title="해당 소환사의 플레이 랭킹입니다.", color=0x00ff00)
 
 
 
