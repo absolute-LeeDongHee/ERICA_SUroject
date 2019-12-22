@@ -24,4 +24,16 @@ async def on_message(message):
 		channel = message.channel
 		await channel.send('https://www.op.gg/spectate/pro/')
 
+	if message.content.startswith("!명령어"):
+		channel = message.channel
+		embed = discord.Embed(title="명령어 모음입니다!", color=0x00ff00)
+		embed.add_field(name='!안녕', value = "인사합니다!", inline=False)
+		embed.add_field(name='!관전',value = "실시간 프로게이머 관전 사이트를 알려줍니다.", inline=False)
+		embed.add_field(name='!전적',value = "검색한 닉네임 유저의 전적을 알려줍니다.", inline=False)
+		embed.add_field(name='!플레이 시간',value = "롤 플레이 시간을 알려줍니다.", inline=False)
+		embed.add_field(name='!시간낭비',value = "롤을 안 했더라면 할 수 있었던 일을 알려줍니다.", inline=False)
+		embed.add_field(name='!플레이 시간 랭킹',value = "롤 플레이 시간 랭킹을 확인할 수 있습니다.", inline=False)
+		await channel.send(embed=embed)
+
+
 client.run(token)
