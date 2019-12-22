@@ -14,14 +14,17 @@ play_time = soup.find_all('div', 'time center')
 rank = soup.find_all('div', 'rank center')
 #소환사 이름 크롤링
 summonername = soup.find(['h1'])
+#그 시간에 할 수 있었던 일 크롤링:
+fact = soup.find_all('div', 'fact center')
 def Check_Time():
-	slt = input("해당 플레이어의 총 플레이 시간을 보시겠습니까?(y/n 대소 구분O)")
+	slt = input("해당 플레이어의 총 플레이 시간을 보시겠습니까?(y/n 대소 구분O) ")
 	if (slt == 'y'):
-		print(summonername + "님의 총 플레이 시간은: ")
+		print(str(summonername.get_text()) + "님의 총 플레이 시간은: ")
 		for i in play_time:
 			print(i.get_text())
 	else:
 		print("올바르지 않은 입력입니다. 프로그램을 종료합니다.")
+
 def ranking():
 	slt2 = input("해당 플레이어의 국내 랭킹을 원하시면 국내, 세계 랭킹을 원하시면 세계를 입력해주세요. ")
 	if (slt2 == '국내'):
@@ -30,3 +33,15 @@ def ranking():
 		print(str(summonername.get_text()) + '님의 세계 랭킹은', rank[1].get_text(strip=True))
 	else:
 		print('올바르지 않은 입력입니다! 실행을 종료합니다.')
+
+def fact_check():
+	slt3 = input("해당 플레이어가 그 시간에 무엇을 할 수 있었는지 확인해보세요! (독서/영화 관람/산책하기) ")
+	if (slt3 == '독서'):
+		print(str(summonername.get_text()) + "님은 " + str(fact[0].get_text()) + "를 할 수 있었습니다...")
+	elif (slt3 == '영화 관람'):
+		print(str(summonername.get_text()) + "님은 " + str(fact[1].get_text()) + "를 할 수 있었습니다...")
+	elif (slt3 == '산책하기'):
+		print(str(summonername.get_text()) + "님은 " + str(fact[2].get_text()) + "를 할 수 있었습니다...")
+	else:
+		print('올바르지 않은 입력입니다! 실행을 종료합니다.')
+fact_check()
