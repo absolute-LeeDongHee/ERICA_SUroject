@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 client = discord.Client()
 
-token = 'Input your token'
+token = 'Input your Token'
 
 @client.event
 async def on_ready():
@@ -167,7 +167,7 @@ async def on_message(message):
 			embed = discord.Embed(title="그가 롤을 하지 않았더라면...", color=0x00ff00)
 			embed.add_field(name='독서', value=str(summonername4.get_text()) + "님은 " + str(fact[0].get_text()) + "를 할 수 있었습니다...", inline=False)
 			embed.add_field(name='영화 관람', value=str(summonername4.get_text()) + "님은 " + str(fact[1].get_text()) + "를 할 수 있었습니다...", inline=False)
-			embed.add_field(name='산책', value=str(summonername4.get_text()) + "님은 " + str(fact[1].get_text()) + "를 할 수 있었습니다...", inline=False)
+			embed.add_field(name='산책', value=str(summonername4.get_text()) + "님은 " + str(fact[2].get_text()) + "를 할 수 있었습니다...", inline=False)
 			await channel.send(embed=embed)
 		else:
 			await channel.send("소환사 정보가 없습니다.")
