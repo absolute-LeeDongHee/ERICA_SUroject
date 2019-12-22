@@ -8,22 +8,25 @@ hdr = {'Accept-Language': 'ko_KR,en;q=0.8', 'User-Agent': ('Mozilla/5.0 (Linux; 
 req = requests.get(url, headers=hdr)
 html = req.text
 soup = BeautifulSoup(html, 'html.parser')
+play_time = soup.find_all('div', 'time center')
+rank = soup.find_all('div', 'rank center')
+summonername = soup.find(['h1'])
 #플레이 시간  크롤링
 def Check_Time():
 	slt = input("해당 플레이어의 총 플레이 시간을 보시겠습니까?(y/n 대소 구분O)")
 	if (slt == 'y'):
-		for i in soup.find_all('div', 'time center'):
+		print(summonername + "님의 총 플레이 시간은: ")
+		for i in play_time:
 			print(i.get_text())
 	else:
 		print("올바르지 않은 입력입니다. 프로그램을 종료합니다.")
 #랭킹 크롤링
 def ranking():
-	slt2 = input("해당 플레이어의 국내 랭킹을 원하시면 국내, 세계 랭킹을 원하시면 세계를 입력해주세요.: ")
-	rank = soup.find_all('div', 'rank center')
+	slt2 = input("해당 플레이어의 국내 랭킹을 원하시면 국내, 세계 랭킹을 원하시면 세계를 입력해주세요. ")
 	if (slt2 == '국내'):
-		print('해당 플레이어의 국내 랭킹은', rank[0].get_text().strip(\n\t))
+		print(str(summonername.get_text()) + '님의 국내 랭킹은', rank[0].get_text(strip=True))
 	elif (slt2 == '세계'):
-		print('해당 플레이어의 세계 랭킹은 ' + rank[1])
+		print('해당 플레이어의 세계 랭킹은 ' + rank[1].get_text(strip=True))
 	else:
 		print('올바르지 않은 입력입니다! 실행을 종료합니다.')
 ranking()
