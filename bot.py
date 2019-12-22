@@ -76,23 +76,29 @@ async def on_message(message):
 		for i in soup.select('span[class=Ratio]'):
 			Ratio.append(i.text)
 		if SummonerName != "":
-			embed = discord.Embed(title="해당 소환사의 전적입니다.", color=0x00ff00)
 			if ('Unranked' in str(TierUnranked[0])):
+				embed = discord.Embed(title="해당 소환사의 솔로 랭크 전적입니다.", color=0x00ff00)
 				embed.add_field(name='솔랭 티어', value="언랭", inline=False)
+				await channel.send(embed=embed)
 			else:
+				embed = discord.Embed(title="해당 소환사의 솔로 랭크 전적입니다.", color=0x00ff00)
 				embed.add_field(name='솔랭 티어', value=Tier[0].strip('\n\t'), inline=False)
 				embed.add_field(name='솔랭 LP', value=LP[0], inline=False)
 				embed.add_field(name='솔랭 승/패', value=Wins[0] + " " + Losses[0], inline=False)
 				embed.add_field(name='솔랭 승률', value=Ratio[0], inline=False)
-				embed.add_field(name='=================', value='=================', inline=False)
+				await channel.send(embed=embed)
 			if 'Unranked' in str(TierUnranked[1]):
+				embed = discord.Embed(title="해당 소환사의 자유 랭크 전적입니다.", color=0x00ff00)
 				embed.add_field(name='자유랭 티어', value="언랭", inline=False)
+				await channel.send(embed=embed)
 			else:
+				embed = discord.Embed(title="해당 소환사의 자유 랭크 전적입니다.", color=0x00ff00)
 				embed.add_field(name='자유랭 티어', value=Tier[1].strip('\n\t'), inline=False)
 				embed.add_field(name='자유랭 LP', value=LP[1], inline=False)
 				embed.add_field(name='자유랭 승/패', value=Wins[1] + " " + Losses[0], inline=False)
 				embed.add_field(name='자랭 승률', value=Ratio[1], inline = False)
-			await channel.send(embed=embed)
+				await channel.send(embed=embed)
+
 		else:
 			await channel.send("소환사 정보가 없습니다.")
 
@@ -135,7 +141,13 @@ async def on_message(message):
 		for i in soup.find_all('div', 'rank center'):
 			rank.append(i)
 		if summonername3 != "":
-			embed = discord.Embed(title="해당 소환사의 플레이 랭킹입니다.", color=0x00ff00)
+			embed = discord.Embed(title="해당 소환사의 플레이 랭킹입니다. (랭킹 뒤의 영어는 해당 지역을 말합니다.)", color=0x00ff00)
+			embed.add_field(name='국내 랭킹', value=rank[0].get_text(strip=True), inline=False)
+			embed.add_field(name='세계 랭킹', value=rank[1].get_text(strip=True), inline=False)
+			await channel.send(embed=embed)
+		else:
+			await channel.send("소환사 정보가 없습니다.")
+
 
 
 
